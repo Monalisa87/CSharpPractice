@@ -11,13 +11,8 @@ namespace NumberOccConsonentChar
 		static void Main(string[] args)
 		{
 			string strValue = "BAREQ";
-			NumberOccStartsWithConsonent(strValue);
-			//Console.WriteLine(value);
-			//Console.ReadLine();
-		}
-		static int factorial(int n)
-		{
-			return (n == 1 || n == 0) ? 1 : factorial(n - 1) * n;
+			Console.WriteLine(NumberOccStartsWithConsonent(strValue));
+			Console.ReadLine();
 		}
 		// Function to check if a  
 		// character is a vowel  
@@ -34,14 +29,16 @@ namespace NumberOccConsonentChar
 		static int NumberOccStartsWithConsonent(string str)
 		{
 			var result = GetPermutations(str, str.Length).ToList().Select(a => string.Join("", a)).ToList();
-			var alternateConsonant = result.Select(item => item.Select((charvalue, index) =>
+			var alternateConsonant = result.Select(item =>
+										item.Select((charvalue, index) =>
 											   new
 											   {
 												   isConsonant = (index % 2 == 0 && !isVowel(charvalue)),
 												   isVowel = (index % 2 != 0 && isVowel(charvalue)),
 												   item
 											   }).ToList()
-								).ToList();
+											).ToList();
+
 			return alternateConsonant.Select(item => item.Where(a => a.isConsonant == true).Count() >= ((str.Length + 1) / 2)).ToList().Where(c => c.Equals(true)).Count();
 		}
 		static IEnumerable<IEnumerable<T>> GetPermutations<T>(IEnumerable<T> list, int length)
