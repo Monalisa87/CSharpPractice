@@ -16,18 +16,15 @@ namespace MissingInteger
 		}
 		static int FindMinimumIntegerMissing(int[] arrayInt)
 		{
-			var arrayMin = arrayInt.Min();
-			var arrayMax = arrayInt.Max();
-
-			for (int value = arrayMin; value < arrayMax; value++)
+			for (int value = arrayInt.Min(); value < arrayInt.Max(); value++)
 			{
-				if (!arrayInt.OrderByDescending(a => a).Contains(value))
+				if (!arrayInt.OrderBy(a => a).Contains(value))
 				{
 					return value;
 				}
 
 			}
-			return arrayMax + 1;
+			return arrayInt.Max() + 1;
 
 		}
 	}
